@@ -114,7 +114,7 @@ func (receiver *FormatFamilies) Next() bool {
 		return false
 	}
 
-	receiver.datum.typ = v4l2_buftype.VideoCapture
+	receiver.datum.typ = v4l2_buftype.Datum(v4l2_buftype.VideoCapture)
 
 	_, _, errorNumber := unix.Syscall(
 		unix.SYS_IOCTL,

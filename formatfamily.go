@@ -1,6 +1,7 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/buftype"
 	"github.com/reiver/go-v4l2/pixelformat"
 )
 
@@ -89,7 +90,7 @@ type FormatFamily struct {
 
 type internalFormatFamily struct {
 	index           uint32                // Format number
-	typ             uint32                // enum v4l2_buf_type
+	typ             v4l2_buftype.Type     // enum v4l2_buf_type
 	flags           uint32
 	description [32]byte                  // Description string
 	pixelFormat     v4l2_pixelformat.Type // Format fourcc
