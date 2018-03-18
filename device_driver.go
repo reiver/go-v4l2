@@ -28,8 +28,8 @@ func (receiver Device) Driver() (string, error) {
 //
 // Example:
 //
-//      device := v4l2.MustOpen(v4l2.Video0)
-//      defer device.MustClose()
+//	device := v4l2.MustOpen(v4l2.Video0)
+//	defer device.MustClose()
 //	
 //	fmt.Printf("Driver: %q \n", device.MustDriver())
 func (receiver Device) MustDriver() string {
