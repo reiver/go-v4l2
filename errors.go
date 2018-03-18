@@ -5,8 +5,9 @@ import (
 )
 
 var (
-	errInternalError = errors.New("Internal Error")
-	errNilReceiver   = errors.New("Nil Receiver")
-	errNotOpen       = errors.New("Not Open")
-	errOpen          = errors.New("Open")
+	errInternalError   = errors.New("Internal Error")
+	errNilReceiver     = errors.New("Nil Receiver")
+	errNotOpen         = errors.New("Not Open")
+	errOpen            = errors.New("Open")
+	errUnsupportedType = errors.New("Unsupported Type")
 )
