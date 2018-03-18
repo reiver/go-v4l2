@@ -20,10 +20,10 @@ import (
 //      }
 //      defer formats.Close()
 //      
-//      var formatDescription v4l2.FormatFamily
+//      var formatFamily v4l2.FormatFamily
 //      forformats.Next() {
 //
-//              err := formats.Decode(&formatDescription)
+//              err := formats.Decode(&formatFamily)
 //              if nil != err {
 //                      fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format: (%T) %v \n", err, err)
 //                      return err
