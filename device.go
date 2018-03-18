@@ -82,6 +82,18 @@ func (receiver *Device) Open(name string) error {
 	return nil
 }
 
+// MustOpen is like Open, except it panic()s if there is an error.
+func (receiver *Device) MustOpen(name string) {
+	if nil == receiver {
+		panic(errNilReceiver)
+	}
+
+	err := receiver.Open(name)
+	if nil != err {
+		panic(err)
+	}
+}
+
 // Close closes the device.
 //
 // You should always close a device after you finished with it, so that you do not create a resource leak.
