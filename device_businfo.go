@@ -40,6 +40,11 @@ func (receiver Device) BusInfo() (string, error) {
 }
 
 // MustBusInfo is like BusInfo, except it panic()s if there is an error.
+//
+//	device := v4l2.MustOpen(v4l2.Video0)
+//	defer device.MustClose()
+//	
+//	fmt.Printf("Bus Info: %q \n", device.MustBusInfo())
 func (receiver Device) MustBusInfo() string {
 	datum, err := receiver.BusInfo()
 	if nil != err {
