@@ -7,7 +7,7 @@ Example
 	
 	pixelFormat = v4l2_pixelformat.FourCC("MJPG")
 
-Examle
+Example
 
 	var pixelFormat
 	
