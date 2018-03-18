@@ -18,7 +18,40 @@ Example:
 	fmt.Printf("Has Video Capture: %v\n", device.MustHasCapability(v4l2.CapabilityVideoCapture))
 	fmt.Printf("Has Streaming I/O: %v\n", device.MustHasCapability(v4l2.CapabilityStreaming))
 
-(That example opens up the V4L2 device at "/dev/video0" on the file system, and displays some basic information about the device.)
+That example opens up the V4L2 device at "/dev/video0" on the file system, and displays some basic information about the device.
+
+(Of course, we could have opened one of the other V4L2 devices. Such as: v4l2.Video1, v4l2.Video2, ..., or v4l2.Video63.)
+
+Continuing this same example:
+
+	formats, err := device.Formats()
+	if nil != err {
+		return err
+	}
+	defer formats.Close()
+	
+	var format v4l2.Format
+	for formats.Next() {
+
+		if err := formats.Decode(&format); nil != err {
+			return err
+		}
+
+		fmt.Printf("[format description] %q (%q) {compressed=%t} {emulated=%t} \n",
+			format.Description(),
+			format.PixelFormat(),
+			format.HasFlags(v4l2.FormatFlagCompressed),
+			format.HasFlags(v4l2.FormatFlagEmulated),
+		)
+
+
+		//@TODO
+	}
+	if err := formats.Err(); nil != err {
+		return err
+	}
+
+Here we have iterating through the formats that are supported for this device.
 
 Device Paths
 
