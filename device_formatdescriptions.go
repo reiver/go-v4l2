@@ -39,25 +39,37 @@ import (
 //      if err := formatDescriptions.Err(); nil != err {
 //              return err
 //      }
-func (receiver Device) FormatDescriptions() (FormatDescriptions, error) {
+func (receiver *Device) FormatDescriptions() (FormatDescriptions, error) {
+	if nil == receiver {
+		return FormatDescriptions{}, errNilReceiver
+	}
+
 	if !receiver.opened {
 		return FormatDescriptions{}, errNotOpen
 	}
 
 	return FormatDescriptions{
-		fileDescriptor: receiver.fileDescriptor,
+		device: receiver,
 	}, nil
 }
 
 // FormatDescriptions is an interator that enables you to list out all the supported formats by the device.
 type FormatDescriptions struct {
-	fileDescriptor int
-	err            error
-	datum          FormatDescription
+	device *Device
+	err     error
+	datum   internalFormatDescription
 }
 
 // Close closes the FormatDescriptions iterator.
-func (receiver FormatDescriptions) Close() error {
+func (receiver *FormatDescriptions) Close() error {
+	if nil == receiver {
+		return nil
+	}
+
+	receiver.device      = nil
+	receiver.err         = nil
+	receiver.datum.index = 0
+
 	return nil
 }
 
@@ -72,7 +84,8 @@ func (receiver FormatDescriptions) Decode(x interface{}) error {
 		return errUnsupportedType
 	}
 
-	*p = receiver.datum
+	p.device   = receiver.device
+	p.internal = receiver.datum
 
 	return nil
 }
@@ -97,11 +110,17 @@ func (receiver *FormatDescriptions) Next() bool {
 		return false
 	}
 
+	device := receiver.device
+	if nil == device {
+		receiver.err = errInternalError
+		return false
+	}
+
 	receiver.datum.typ = const_V4L2_BUF_TYPE_VIDEO_CAPTURE
 
 	_, _, errorNumber := unix.Syscall(
 		unix.SYS_IOCTL,
-		uintptr(receiver.fileDescriptor),
+		uintptr(device.fileDescriptor),
 		const_VIDIOC_ENUM_FMT,
 		uintptr(unsafe.Pointer(&receiver.datum)),
 	)

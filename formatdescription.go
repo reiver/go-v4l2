@@ -75,6 +75,11 @@ package v4l2
 //
 // v4l2.FormatDescription is the same as the V4L2 (Video4Linux version 2) type v4l2_fmtdesc.
 type FormatDescription struct {
+	device  *Device
+	internal internalFormatDescription
+}
+
+type internalFormatDescription struct {
 	index           uint32 // Format number
 	typ             uint32 // enum v4l2_buf_type
 	flags           uint32
