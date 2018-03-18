@@ -6,6 +6,15 @@ import (
 
 // Type represents a V4L2 (Video4Linux version 2) pixel format.
 type Type struct {
+
+	// NOTE THAT THIS STRUCT MUST BE EXACLTLY 4 BYTES IN SIZE.
+	//
+	// THIS IS WHAT THE V4L2 (Video4Linux version 2) DRIVERS EXPECT.
+	//
+	// THUS WE CANNOT PUT EXTRA (USUAL) HIDDEN FIELDS IN HERE.
+	//
+	// THERE MUST ONLY BE A SINGLE uint32 FIELD IN THIS STRUCT!
+
 	value uint32
 }
 
