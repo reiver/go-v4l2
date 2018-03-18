@@ -1,6 +1,8 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/pixelformat"
+
 	"fmt"
 	"unsafe"
 )
@@ -12,17 +14,13 @@ const (
 )
 
 type FrameSize struct {
-	index        uint32 // Frame size number
-	pixelFormat  uint32 // Pixel format
-	typ          uint32 // Frame size type the device supports.
+	index        uint32                // Frame size number
+	PixelFormat  v4l2_pixelformat.Type // Pixel format
+	typ          uint32                // Frame size type the device supports.
 
-	frameSize [6]uint32 // Frame size
+	frameSize [6]uint32                // Frame size
 
-	reserved  [2]uint32 // Reserved space for future use
-}
-
-func (receiver FrameSize) PixelFormat() string {
-	return fourcc(receiver.pixelFormat).String()
+	reserved  [2]uint32                // Reserved space for future use
 }
 
 func (receiver FrameSize) Cast() (interface{}, error) {
@@ -39,55 +37,43 @@ func (receiver FrameSize) Cast() (interface{}, error) {
 }
 
 type FrameSizeDiscrete struct {
-	index              uint32 // Frame size number
-	pixelFormat        uint32 // Pixel format
-	typ                uint32 // Frame size type the device supports.
+	index              uint32                // Frame size number
+	PixelFormat        v4l2_pixelformat.Type // Pixel format
+	typ                uint32                // Frame size type the device supports.
 
 	Width              uint32
 	Height             uint32
 	restOfFrameSize [4]uint32
 
-	reserved        [2]uint32 // Reserved space for future use
-}
-
-func (receiver FrameSizeDiscrete) PixelFormat() string {
-	return fourcc(receiver.pixelFormat).String()
+	reserved        [2]uint32                // Reserved space for future use
 }
 
 type FrameSizeContinuous struct {
-	index              uint32 // Frame size number
-	pixelFormat        uint32 // Pixel format
-	typ                uint32 // Frame size type the device supports.
+	index              uint32                // Frame size number
+	PixelFormat        v4l2_pixelformat.Type // Pixel format
+	typ                uint32                // Frame size type the device supports.
 
-	MinWidth           uint32 // Minimum frame width [pixel]
-	MaxWidth           uint32 // Maximum frame width [pixel]
-	StepWidth          uint32 // Frame width step size [pixel]
-	MinHeight          uint32 // Minimum frame height [pixel]
-	MaxHeight          uint32 // Maximum frame height [pixel]
-	StepHeight         uint32 // Frame height step size [pixel]
+	MinWidth           uint32                // Minimum frame width [pixel]
+	MaxWidth           uint32                // Maximum frame width [pixel]
+	StepWidth          uint32                // Frame width step size [pixel]
+	MinHeight          uint32                // Minimum frame height [pixel]
+	MaxHeight          uint32                // Maximum frame height [pixel]
+	StepHeight         uint32                // Frame height step size [pixel]
 
-	reserved        [2]uint32 // Reserved space for future use
-}
-
-func (receiver FrameSizeContinuous) PixelFormat() string {
-	return fourcc(receiver.pixelFormat).String()
+	reserved        [2]uint32                // Reserved space for future use
 }
 
 type FrameSizeStepwise struct {
-	index              uint32 // Frame size number
-	pixelFormat        uint32 // Pixel format
-	typ                uint32 // Frame size type the device supports.
+	index              uint32                // Frame size number
+	PixelFormat        v4l2_pixelformat.Type // Pixel format
+	typ                uint32                // Frame size type the device supports.
 
-	MinWidth           uint32 // Minimum frame width [pixel]
-	MaxWidth           uint32 // Maximum frame width [pixel]
-	StepWidth          uint32 // Frame width step size [pixel]
-	MinHeight          uint32 // Minimum frame height [pixel]
-	MaxHeight          uint32 // Maximum frame height [pixel]
-	StepHeight         uint32 // Frame height step size [pixel]
+	MinWidth           uint32                // Minimum frame width [pixel]
+	MaxWidth           uint32                // Maximum frame width [pixel]
+	StepWidth          uint32                // Frame width step size [pixel]
+	MinHeight          uint32                // Minimum frame height [pixel]
+	MaxHeight          uint32                // Maximum frame height [pixel]
+	StepHeight         uint32                // Frame height step size [pixel]
 
-	reserved        [2]uint32 // Reserved space for future use
-}
-
-func (receiver FrameSizeStepwise) PixelFormat() string {
-	return fourcc(receiver.pixelFormat).String()
+	reserved        [2]uint32                // Reserved space for future use
 }

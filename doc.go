@@ -76,13 +76,13 @@ Extending that last code block, to fill in that "//@TODO", we can iterate throug
 			switch t := casted.(type) {
 			case v4l2.FrameSizeDiscrete:
 				fmt.Printf("\t [frame size discrete] pixel_format=%q, width=%d, height=%d \n",
-					t.PixelFormat(),
+					t.PixelFormat,
 					t.Width,
 					t.Height,
 				)
 			case v4l2.FrameSizeContinuous:
 				fmt.Printf("\t [frame size continuous] pixel_format=%q, min_width=%d, max_width=%d, min_height=%d, max_height=% \n",
-					t.PixelFormat(),
+					t.PixelFormat,
 					t.MinWidth,
 					t.MaxWidth,
 					t.MinHeight,
@@ -90,7 +90,7 @@ Extending that last code block, to fill in that "//@TODO", we can iterate throug
 				)
 			case v4l2.FrameSizeStepwise:
 				fmt.Printf("\t [frame size stepwise] pixel_format=%q, min_width=%d, max_width=%d, min_height=%d, max_height=% \n",
-					t.PixelFormat(),
+					t.PixelFormat,
 					t.MinWidth,
 					t.MaxWidth,
 					t.MinHeight,

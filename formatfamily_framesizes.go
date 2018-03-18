@@ -1,6 +1,8 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/pixelformat"
+
 	"golang.org/x/sys/unix"
 
 	"unsafe"
@@ -30,7 +32,7 @@ func (receiver *FormatFamily) FrameSizes() (FrameSizes, error) {
 // FrameSizes is an interator that enables you to list out all the supported formats by the format family.
 type FrameSizes struct {
 	device      *Device
-	pixelFormat  uint32
+	pixelFormat  v4l2_pixelformat.Type
 	err          error
 	datum        FrameSize
 }
@@ -90,7 +92,7 @@ func (receiver *FrameSizes) Next() bool {
 		return false
 	}
 
-	receiver.datum.pixelFormat = receiver.pixelFormat
+	receiver.datum.PixelFormat = receiver.pixelFormat
 
 	_, _, errorNumber := unix.Syscall(
 		unix.SYS_IOCTL,

@@ -1,5 +1,9 @@
 package v4l2
 
+import (
+	"github.com/reiver/go-v4l2/pixelformat"
+)
+
 // FormatFamily is a format family.
 //
 // A format family contains:
@@ -84,10 +88,10 @@ type FormatFamily struct {
 }
 
 type internalFormatFamily struct {
-	index           uint32 // Format number
-	typ             uint32 // enum v4l2_buf_type
+	index           uint32                // Format number
+	typ             uint32                // enum v4l2_buf_type
 	flags           uint32
-	description [32]byte   // Description string
-	pixelFormat     uint32 // Format fourcc
+	description [32]byte                  // Description string
+	pixelFormat     v4l2_pixelformat.Type // Format fourcc
 	reserved     [4]uint32
 }
