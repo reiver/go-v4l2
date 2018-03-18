@@ -25,11 +25,11 @@ import (
 //
 //              err := formatDescriptions.Decode(&formatDescription)
 //              if nil != err {
-//                      fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format description: (%T) %v \n", err, err)
+//                      fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format: (%T) %v \n", err, err)
 //                      return err
 //              }
 //
-//              fmt.Printf("[format description] %q (%q) {compressed=%t} {emulated=%t} \n",
+//              fmt.Printf("[format] %q (%q) {compressed=%t} {emulated=%t} \n",
 //                      formatDescription.Description(),
 //                      formatDescription.PixelFormat(),
 //                      formatDescription.HasFlags(v4l2.FormatFlagCompressed),
@@ -69,7 +69,7 @@ func (receiver *Formats) Close() error {
 	return nil
 }
 
-// Decode loads the next format description (previously obtained by calling Next).
+// Decode loads the next format (previously obtained by calling Next).
 func (receiver Formats) Decode(x interface{}) error {
 	if nil != receiver.err {
 		return receiver.err
@@ -95,12 +95,12 @@ func  (receiver *Formats) Err() error {
 	return receiver.err
 }
 
-// Next fetches the next format description.
+// Next fetches the next format.
 //
-// If there is a next format description, it returns true.
-// And the next format description get be obtained by calling Decode.
+// If there is a next format, it returns true.
+// And the next format get be obtained by calling Decode.
 //
-// If there is not next format description, then it returns false.
+// If there is not next format, then it returns false.
 func (receiver *Formats) Next() bool {
 	if nil == receiver {
 		return false
