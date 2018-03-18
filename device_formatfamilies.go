@@ -1,6 +1,8 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/buftype"
+
 	"golang.org/x/sys/unix"
 
 	"unsafe"
@@ -112,7 +114,7 @@ func (receiver *FormatFamilies) Next() bool {
 		return false
 	}
 
-	receiver.datum.typ = const_V4L2_BUF_TYPE_VIDEO_CAPTURE
+	receiver.datum.typ = v4l2_buftype.VideoCapture
 
 	_, _, errorNumber := unix.Syscall(
 		unix.SYS_IOCTL,
