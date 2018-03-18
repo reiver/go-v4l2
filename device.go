@@ -32,6 +32,16 @@ func Open(name string) (*Device, error) {
 	return &device, nil
 }
 
+// MustOpen is like Open, except it panic()s if there is an error.
+func MustOpen(name string) *Device {
+	datum, err := Open(name)
+	if nil != err {
+		panic(err)
+	}
+
+	return datum
+}
+
 // Open opens a V4L2 device.
 //
 // (This method exist so as not to create GC pressure.)
