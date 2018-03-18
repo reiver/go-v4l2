@@ -30,6 +30,11 @@ func (receiver Device) Card() (string, error) {
 }
 
 // MustCard is like BusCard, except it panic()s if there is an error.
+//
+//	device := v4l2.MustOpen(v4l2.Video0)
+//	defer device.MustClose()
+//	
+//	fmt.Printf("Card: %q \n", device.MustCard())
 func (receiver Device) MustCard() string {
 	datum, err := receiver.Card()
 	if nil != err {
