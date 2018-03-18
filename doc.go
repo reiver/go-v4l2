@@ -17,5 +17,31 @@ Example:
 	fmt.Println()
 	fmt.Printf("Has Video Capture: %v\n", device.MustHasCapability(v4l2.CapabilityVideoCapture))
 	fmt.Printf("Has Streaming I/O: %v\n", device.MustHasCapability(v4l2.CapabilityStreaming))
+
+Device Paths
+
+One thing to be cognisant of, is that on Linux systems, V4L2 (Video4Linux version 2) will create a (special) file in the
+/dev/ directory for every V4L2 device.
+
+These devices will name path names such as:
+
+• /dev/video0
+
+• /dev/video1
+
+• /dev/video2
+
+…
+
+• /dev/video63
+
+You would call Open using these names directly. For example:
+
+	device, err := v4l2.Open("/dev/video3")
+
+However, this package also provides constants that can be used. For example:
+
+	device, err := v4l2.Open(v4l2.Video3)
+
 */
 package v4l2
