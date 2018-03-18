@@ -6,7 +6,7 @@ import (
 	"unsafe"
 )
 
-// Formats returns an iterator that enables you to list out all the supported formats by the device.
+// FormatFamilies returns an iterator that enables you to list out all the supported formats by the device.
 //
 // Example:
 //
@@ -14,7 +14,7 @@ import (
 //      
 //      // ...
 //      
-//      formats, err := device.Formats() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.Formats() METHOD IS CALLED.
+//      formats, err := device.FormatFamilies() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.FormatFamilies() METHOD IS CALLED.
 //      if nil != err {
 //              return err
 //      }
@@ -39,25 +39,25 @@ import (
 //      if err := formats.Err(); nil != err {
 //              return err
 //      }
-func (receiver *Device) Formats() (Formats, error) {
+func (receiver *Device) FormatFamilies() (FormatFamilies, error) {
 	if err := receiver.unfit(); nil != err {
-		return Formats{}, err
+		return FormatFamilies{}, err
 	}
 
-	return Formats{
+	return FormatFamilies{
 		device: receiver,
 	}, nil
 }
 
-// Formats is an interator that enables you to list out all the supported formats by the device.
-type Formats struct {
+// FormatFamilies is an interator that enables you to list out all the supported formats by the device.
+type FormatFamilies struct {
 	device *Device
 	err     error
 	datum   internalFormatFamily
 }
 
-// Close closes the Formats iterator.
-func (receiver *Formats) Close() error {
+// Close closes the FormatFamilies iterator.
+func (receiver *FormatFamilies) Close() error {
 	if nil == receiver {
 		return nil
 	}
@@ -70,7 +70,7 @@ func (receiver *Formats) Close() error {
 }
 
 // Decode loads the next format (previously obtained by calling Next).
-func (receiver Formats) Decode(x interface{}) error {
+func (receiver FormatFamilies) Decode(x interface{}) error {
 	if nil != receiver.err {
 		return receiver.err
 	}
@@ -87,7 +87,7 @@ func (receiver Formats) Decode(x interface{}) error {
 }
 
 // Err returns any errors that occurred when Next was called.
-func  (receiver *Formats) Err() error {
+func  (receiver *FormatFamilies) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -101,7 +101,7 @@ func  (receiver *Formats) Err() error {
 // And the next format get be obtained by calling Decode.
 //
 // If there is not next format, then it returns false.
-func (receiver *Formats) Next() bool {
+func (receiver *FormatFamilies) Next() bool {
 	if nil == receiver {
 		return false
 	}
