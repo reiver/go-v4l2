@@ -6,8 +6,8 @@ import (
 	"unsafe"
 )
 
-// FrameSizes returns an iterator that enables you to list out all the supported frame sizes by the format description.
-func (receiver *FormatDescription) FrameSizes() (FrameSizes, error) {
+// FrameSizes returns an iterator that enables you to list out all the supported frame sizes by the format.
+func (receiver *Format) FrameSizes() (FrameSizes, error) {
 	if nil == receiver {
 		return FrameSizes{}, errNilReceiver
 	}

@@ -20,7 +20,7 @@ import (
 //      }
 //      defer formatDescriptions.Close()
 //      
-//      var formatDescription v4l2.FormatDescription
+//      var formatDescription v4l2.Format
 //      forformatDescriptions.Next() {
 //
 //              err := formatDescriptions.Decode(&formatDescription)
@@ -32,8 +32,8 @@ import (
 //              fmt.Printf("[format description] %q (%q) {compressed=%t} {emulated=%t} \n",
 //                      formatDescription.Description(),
 //                      formatDescription.PixelFormat(),
-//                      formatDescription.HasFlags(v4l2.FormatDescriptionFlagCompressed),
-//                      formatDescription.HasFlags(v4l2.FormatDescriptionFlagEmulated),
+//                      formatDescription.HasFlags(v4l2.FormatFlagCompressed),
+//                      formatDescription.HasFlags(v4l2.FormatFlagEmulated),
 //              )
 //      }
 //      if err := formatDescriptions.Err(); nil != err {
@@ -53,7 +53,7 @@ func (receiver *Device) FormatDescriptions() (FormatDescriptions, error) {
 type FormatDescriptions struct {
 	device *Device
 	err     error
-	datum   internalFormatDescription
+	datum   internalFormat
 }
 
 // Close closes the FormatDescriptions iterator.
@@ -75,7 +75,7 @@ func (receiver FormatDescriptions) Decode(x interface{}) error {
 		return receiver.err
 	}
 
-	p, ok := x.(*FormatDescription)
+	p, ok := x.(*Format)
 	if !ok {
 		return errUnsupportedType
 	}

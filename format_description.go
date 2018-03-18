@@ -9,7 +9,7 @@ package v4l2
 // • "Motion-JPEG",
 //
 // • etc.
-func (receiver FormatDescription) Description() string {
+func (receiver Format) Description() string {
 
 	max := len(receiver.internal.description)
 

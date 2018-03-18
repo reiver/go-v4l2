@@ -1,42 +1,42 @@
 package v4l2
 
 const (
-	FormatDescriptionFlagCompressed = 0x0001
-	FormatDescriptionFlagEmulated   = 0x0002
+	FormatFlagCompressed = 0x0001
+	FormatFlagEmulated   = 0x0002
 )
 
-// HasFlags returns true if the FormatDescription has all the flags inquired about,
+// HasFlags returns true if the Format has all the flags inquired about,
 // and returns false otherwise.
 //
 // Example:
 //
-//	var formatDescription v4l2.FormatDescription
+//	var format v4l2.Format
 //	
 //	// ...
 //	
-//	if formatDescription.HasFlags(v4l2.FormatDescriptionFlagCompressed) {
+//	if format.HasFlags(v4l2.FormatFlagCompressed) {
 //		//@TODO
 //	}
 //
 // Example:
 //
-//	var formatDescription v4l2.FormatDescription
+//	var format v4l2.Format
 //	
 //	// ...
 //	
-//	if formatDescription.HasFlags(v4l2.FormatDescriptionFlagEmulated) {
+//	if format.HasFlags(v4l2.FormatFlagEmulated) {
 //		//@TODO
 //	}
 //
 // Example:
 //
-//	var formatDescription v4l2.FormatDescription
+//	var format v4l2.Format
 //	
 //	// ...
 //	
-//	if formatDescription.HasFlags(v4l2.FormatDescriptionFlagCompressed | v4l2.FormatDescriptionFlagEmulated) {
+//	if format.HasFlags(v4l2.FormatFlagCompressed | v4l2.FormatFlagEmulated) {
 //		//@TODO
 //	}
-func (receiver FormatDescription) HasFlags(flags uint32) bool {
+func (receiver Format) HasFlags(flags uint32) bool {
 	return 0 != (receiver.internal.flags & flags)
 }
