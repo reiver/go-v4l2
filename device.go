@@ -115,3 +115,14 @@ func (receiver *Device) Close() error {
 
 	return nil
 }
+
+func (receiver *Device) MustClose() {
+	if nil == receiver {
+		panic(errNilReceiver)
+	}
+
+	err := receiver.Close()
+	if nil != err {
+		panic(err)
+	}
+}
