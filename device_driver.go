@@ -25,6 +25,13 @@ func (receiver Device) Driver() (string, error) {
 }
 
 // MustDriver is like Driver, except it panic()s if there is an error.
+//
+// Example:
+//
+//      device := v4l2.MustOpen(v4l2.Video0)
+//      defer device.MustClose()
+//	
+//	fmt.Printf("Driver: %q \n", device.MustDriver())
 func (receiver Device) MustDriver() string {
 	datum, err := receiver.Driver()
 	if nil != err {
