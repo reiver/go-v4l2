@@ -29,5 +29,13 @@ const (
 	                        (uintptr('V')                               << const_IOC_TYPESHIFT) |
 	                        (2                                          << const_IOC_NRSHIFT)   |
 	                        (unsafe.Sizeof(internalFormatDescription{}) << const_IOC_SIZESHIFT)
+
+	// A Golang conversion of the following C code:
+	//
+	// #define VIDIOC_ENUM_FRAMESIZES  _IOWR('V', 74, struct v4l2_frmsizeenum)
+	const_VIDIOC_ENUM_FRAMESIZES = ((const_IOC_READ | const_IOC_WRITE) << const_IOC_DIRSHIFT)  |
+	                               (uintptr('V')                       << const_IOC_TYPESHIFT) |
+	                               (74                                 << const_IOC_NRSHIFT)   |
+	                               (unsafe.Sizeof(FrameSize{})         << const_IOC_SIZESHIFT)
 )
 
