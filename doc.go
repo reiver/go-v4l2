@@ -24,16 +24,16 @@ That example opens up the V4L2 device at "/dev/video0" on the file system, and d
 
 Continuing this same example:
 
-	formats, err := device.Formats()
+	formatFamilies, err := device.FormatFamilies()
 	if nil != err {
 		return err
 	}
-	defer formats.Close()
+	defer formatFamilies.Close()
 	
 	var formatFamily v4l2.FormatFamily
-	for formats.Next() {
+	for formatFamilies.Next() {
 		
-		if err := formats.Decode(&formatFamily); nil != err {
+		if err := formatFamilies.Decode(&formatFamily); nil != err {
 			return err
 		}
 		
@@ -47,7 +47,7 @@ Continuing this same example:
 		
 		//@TODO
 	}
-	if err := formats.Err(); nil != err {
+	if err := formatFamilies.Err(); nil != err {
 		return err
 	}
 
