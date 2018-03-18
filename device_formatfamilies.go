@@ -30,10 +30,10 @@ import (
 //              }
 //
 //              fmt.Printf("[format] %q (%q) {compressed=%t} {emulated=%t} \n",
-//                      formatDescription.Description(),
-//                      formatDescription.PixelFormat(),
-//                      formatDescription.HasFlags(v4l2.FormatFamilyFlagCompressed),
-//                      formatDescription.HasFlags(v4l2.FormatFamilyFlagEmulated),
+//                      formatFamily.Description(),
+//                      formatFamily.PixelFormat(),
+//                      formatFamily.HasFlags(v4l2.FormatFamilyFlagCompressed),
+//                      formatFamily.HasFlags(v4l2.FormatFamilyFlagEmulated),
 //              )
 //      }
 //      if err := formats.Err(); nil != err {
