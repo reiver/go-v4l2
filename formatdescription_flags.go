@@ -38,5 +38,5 @@ const (
 //		//@TODO
 //	}
 func (receiver FormatDescription) HasFlags(flags uint32) bool {
-	return 0 != (receiver.flags & flags)
+	return 0 != (receiver.internal.flags & flags)
 }

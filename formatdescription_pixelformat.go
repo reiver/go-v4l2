@@ -14,10 +14,10 @@ import (
 //
 // • etc,
 func (receiver FormatDescription) PixelFormat() string {
-	a := byte(receiver.pixelformat         & 0xff)
-	b := byte((receiver.pixelformat >>  8) & 0xff)
-	c := byte((receiver.pixelformat >> 16) & 0xff)
-	d := byte((receiver.pixelformat >> 24) & 0xff)
+	a := byte( receiver.internal.pixelformat        & 0xff)
+	b := byte((receiver.internal.pixelformat >>  8) & 0xff)
+	c := byte((receiver.internal.pixelformat >> 16) & 0xff)
+	d := byte((receiver.internal.pixelformat >> 24) & 0xff)
 
 	return fmt.Sprintf("%c%c%c%c", a, b, c, d)
 }

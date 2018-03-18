@@ -11,16 +11,16 @@ package v4l2
 // • etc.
 func (receiver FormatDescription) Description() string {
 
-	max := len(receiver.description)
+	max := len(receiver.internal.description)
 
 	index := 0
 
 	for ; index < max; index++ {
-		if 0 == receiver.description[index] {
+		if 0 == receiver.internal.description[index] {
 			break
 		}
 	}
 
-	return string(receiver.description[:index])
+	return string(receiver.internal.description[:index])
 }
 
