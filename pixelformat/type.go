@@ -69,6 +69,13 @@ func FourCC(value string) Type {
 //
 // Or also, for example, even if the value stored as the machine-readable uint32 0x30385056,
 // String will return this as "VP80".
+//
+// Example
+//
+//	pixelFormat := v4l2_pixelformat.FourCC("PAL8")
+//	
+//	fmt.Printf("Pixel Format: %q \n", pixelFormat)
+//	// Output: Pixel Format: "PAL8"
 func (receiver Type) String() string {
 	a := byte( receiver.value        & 0xff)
 	b := byte((receiver.value >>  8) & 0xff)
