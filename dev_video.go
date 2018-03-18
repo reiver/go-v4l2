@@ -14,6 +14,18 @@ package v4l2
 // …
 //
 // • v4l2.Video63 = "/dev/video63"
+//
+// Use these with the v4l2.Device.Open() method or the v4l2.Open() func.
+//
+// For example:
+//
+//	device, err := v4l2.Open(v4l2.Video0)
+//
+// Or, alternatively, for example:
+//
+//	var device v4l2.Device
+//	
+//	err := device.Open(v4l2.Video0)
 const (
 	Video0 = "/dev/video0"
 	Video1 = "/dev/video1"
