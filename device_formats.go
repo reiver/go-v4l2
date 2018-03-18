@@ -6,7 +6,7 @@ import (
 	"unsafe"
 )
 
-// FormatDescriptions returns an iterator that enables you to list out all the supported formats by the device.
+// Formats returns an iterator that enables you to list out all the supported formats by the device.
 //
 // Example:
 //
@@ -14,7 +14,7 @@ import (
 //      
 //      // ...
 //      
-//      formatDescriptions, err := device.FormatDescriptions() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.FormatDescriptions() METHOD IS CALLED.
+//      formatDescriptions, err := device.Formats() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.Formats() METHOD IS CALLED.
 //      if nil != err {
 //              return err
 //      }
@@ -39,25 +39,25 @@ import (
 //      if err := formatDescriptions.Err(); nil != err {
 //              return err
 //      }
-func (receiver *Device) FormatDescriptions() (FormatDescriptions, error) {
+func (receiver *Device) Formats() (Formats, error) {
 	if err := receiver.unfit(); nil != err {
-		return FormatDescriptions{}, err
+		return Formats{}, err
 	}
 
-	return FormatDescriptions{
+	return Formats{
 		device: receiver,
 	}, nil
 }
 
-// FormatDescriptions is an interator that enables you to list out all the supported formats by the device.
-type FormatDescriptions struct {
+// Formats is an interator that enables you to list out all the supported formats by the device.
+type Formats struct {
 	device *Device
 	err     error
 	datum   internalFormat
 }
 
-// Close closes the FormatDescriptions iterator.
-func (receiver *FormatDescriptions) Close() error {
+// Close closes the Formats iterator.
+func (receiver *Formats) Close() error {
 	if nil == receiver {
 		return nil
 	}
@@ -70,7 +70,7 @@ func (receiver *FormatDescriptions) Close() error {
 }
 
 // Decode loads the next format description (previously obtained by calling Next).
-func (receiver FormatDescriptions) Decode(x interface{}) error {
+func (receiver Formats) Decode(x interface{}) error {
 	if nil != receiver.err {
 		return receiver.err
 	}
@@ -87,7 +87,7 @@ func (receiver FormatDescriptions) Decode(x interface{}) error {
 }
 
 // Err returns any errors that occurred when Next was called.
-func  (receiver *FormatDescriptions) Err() error {
+func  (receiver *Formats) Err() error {
 	if nil == receiver {
 		return errNilReceiver
 	}
@@ -101,7 +101,7 @@ func  (receiver *FormatDescriptions) Err() error {
 // And the next format description get be obtained by calling Decode.
 //
 // If there is not next format description, then it returns false.
-func (receiver *FormatDescriptions) Next() bool {
+func (receiver *Formats) Next() bool {
 	if nil == receiver {
 		return false
 	}
