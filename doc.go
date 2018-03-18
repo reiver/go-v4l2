@@ -32,19 +32,19 @@ Continuing this same example:
 	
 	var format v4l2.Format
 	for formats.Next() {
-
+		
 		if err := formats.Decode(&format); nil != err {
 			return err
 		}
-
+		
 		fmt.Printf("[format description] %q (%q) {compressed=%t} {emulated=%t} \n",
 			format.Description(),
 			format.PixelFormat(),
 			format.HasFlags(v4l2.FormatFlagCompressed),
 			format.HasFlags(v4l2.FormatFlagEmulated),
 		)
-
-
+		
+		
 		//@TODO
 	}
 	if err := formats.Err(); nil != err {
@@ -52,6 +52,59 @@ Continuing this same example:
 	}
 
 Here we have iterating through the formats that are supported for this device.
+
+Extending that last code block, to fill in that "//@TODO", we can iterate through the frame sizes, for each format, we the following:
+
+		frameSizes, err := format.FrameSizes()
+		if nil != err {
+			return return
+		}
+		defer frameSizes.Close()
+		
+		var frameSize v4l2.FrameSize
+		for frameSizes.Next() {
+			
+			if err := frameSizes.Decode(&frameSize); nil != err {
+				return err
+			}
+			
+			casted, err := frameSize.Cast()
+			if nil != err {
+				return err
+			}
+			
+			switch t := casted.(type) {
+			case v4l2.FrameSizeDiscrete:
+				fmt.Printf("\t [frame size discrete] pixel_format=%q, width=%d, height=%d \n",
+					t.PixelFormat(),
+					t.Width,
+					t.Height,
+				)
+			case v4l2.FrameSizeContinuous:
+				fmt.Printf("\t [frame size continuous] pixel_format=%q, min_width=%d, max_width=%d, min_height=%d, max_height=% \n",
+					t.PixelFormat(),
+					t.MinWidth,
+					t.MaxWidth,
+					t.MinHeight,
+					t.MaxHeight,
+				)
+			case v4l2.FrameSizeStepwise:
+				fmt.Printf("\t [frame size stepwise] pixel_format=%q, min_width=%d, max_width=%d, min_height=%d, max_height=% \n",
+					t.PixelFormat(),
+					t.MinWidth,
+					t.MaxWidth,
+					t.MinHeight,
+					t.MaxHeight,
+				)
+			default:
+				return err
+			}
+
+		}
+		if err := frameSizes.Err(); nil != err {
+			return err
+		}
+
 
 Device Paths
 
