@@ -18,6 +18,8 @@ Example:
 	fmt.Printf("Has Video Capture: %v\n", device.MustHasCapability(v4l2.CapabilityVideoCapture))
 	fmt.Printf("Has Streaming I/O: %v\n", device.MustHasCapability(v4l2.CapabilityStreaming))
 
+(That example opens up the V4L2 device at "/dev/video0" on the file system, and displays some basic information about the device.)
+
 Device Paths
 
 One thing to be cognisant of, is that on Linux systems, V4L2 (Video4Linux version 2) will create a (special) file in the
