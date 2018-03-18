@@ -38,7 +38,7 @@ package v4l2
 //
 // Etc.
 //
-// Usually, one would get a series of format descriptions by  iterating through all the support formats
+// Usually, one would get a series of format descriptions by iterating through all the supported formats
 // that are supported by a device.
 //
 // Example:
