@@ -21,10 +21,10 @@ const (
 	CapabilityVideoCapture            = 0x00000001 // (V4L2_CAP_VIDEO_CAPTURE)        Is a video capture device
 	CapabilityVideoOutput             = 0x00000002 // (V4L2_CAP_VIDEO_OUTPUT)         Is a video output device
 	CapabilityVideoOverlay            = 0x00000004 // (V4L2_CAP_VIDEO_OVERLAY)        Can do video overlay
-	CapabilityVbiCapture              = 0x00000010 // (V4L2_CAP_VBI_CAPTURE)          Is a raw VBI capture device
-	CapabilityVbiOutput               = 0x00000020 // (V4L2_CAP_VBI_OUTPUT)           Is a raw VBI output device
-	CapabilitySlicedVbiCapture        = 0x00000040 // (V4L2_CAP_SLICED_VBI_CAPTURE)   Is a sliced VBI capture device
-	CapabilitySlicedVbiOutput         = 0x00000080 // (V4L2_CAP_SLICED_VBI_OUTPUT)    Is a sliced VBI output device
+	CapabilityVBICapture              = 0x00000010 // (V4L2_CAP_VBI_CAPTURE)          Is a raw VBI capture device
+	CapabilityVBIOutput               = 0x00000020 // (V4L2_CAP_VBI_OUTPUT)           Is a raw VBI output device
+	CapabilitySlicedVBICapture        = 0x00000040 // (V4L2_CAP_SLICED_VBI_CAPTURE)   Is a sliced VBI capture device
+	CapabilitySlicedVBIOutput         = 0x00000080 // (V4L2_CAP_SLICED_VBI_OUTPUT)    Is a sliced VBI output device
 	CapabilityRDSCapture              = 0x00000100 // (V4L2_CAP_RDS_CAPTURE)          RDS data capture
 	CapabilityVideoOutputOverlay      = 0x00000200 // (V4L2_CAP_VIDEO_OUTPUT_OVERLAY) Can do video output overlay
 	CapabilityHardwareFrequencySeek   = 0x00000400 // (V4L2_CAP_HW_FREQ_SEEK)         Can do hardware frequency seek
