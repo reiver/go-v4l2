@@ -1,6 +1,6 @@
 package v4l2
 
-// BusInfo returns location of the V4L2 device in the system.
+// BusInfo returns the location of the V4L2 device in the system.
 //
 // Example values that BusInfo might return are:
 //
