@@ -4,10 +4,18 @@ import (
 	"fmt"
 )
 
+// Type represents a V4L2 (Video4Linux version 2) pixel format.
 type Type struct {
 	value uint32
 }
 
+// FourCC returns a pixelformat.Type from a FOURCC code.
+//
+// Example:
+//
+//	var pixelFormat v4l2_pixelformat.Type
+//	
+//	pixelFormat = v4l2_pixelformat.FourCC("YUYV")
 func FourCC(value string) Type {
 
 	var a byte = ' '
@@ -42,6 +50,16 @@ func FourCC(value string) Type {
 	return Type{code}
 }
 
+// String returns a human-readable version of v4l2_pixelformat.Type.
+//
+// So, rather than returning a machine-readable binary uint32,
+// it returns a human-readable FOURCC code string.
+//
+// So, for example, even if the value stored as the machine-readable uint32 0x47504a4d,
+// String will return this as "MJPG".
+//
+// Or also, for example, even if the value stored as the machine-readable uint32 0x30385056,
+// String will return this as "VP80".
 func (receiver Type) String() string {
 	a := byte( receiver.value        & 0xff)
 	b := byte((receiver.value >>  8) & 0xff)
