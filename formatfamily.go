@@ -1,8 +1,8 @@
 package v4l2
 
-// Format is a format.
+// FormatFamily is a format family.
 //
-// A format contains:
+// A format family contains:
 //
 // • a human-readable description,
 //
@@ -10,11 +10,15 @@ package v4l2
 //
 // • flags.
 //
+// As well as logicall "containing" a list of frame sizes.
+//
 // The possible flags are given by the constants:
 //
-// • v4l2.FormatFlagCompressed, and
+// • v4l2.FormatFamilyFlagCompressed, and
 //
-// • v4l2.FormatFlagEmulated.
+// • v4l2.FormatFamilyFlagEmulated.
+//
+// Samples:
 //
 // An example format migh have have values such as:
 //
@@ -53,33 +57,33 @@ package v4l2
 //	}
 //	defer formats.Close()
 //	
-//	var format v4l2.Format // <---- NOTE THAT THIS IS THE v4l2.Format TYPE.
+//	var formatFamily v4l2.FormatFamily // <---- NOTE THAT THIS IS THE v4l2.FormatFamily TYPE.
 //	forformats.Next() {
 //
-//		err := formats.Decode(&format) // <---- NOTE THAT WE ARE PUTTING A NEW VALUE INTO THE v4l2.Format HERE.
+//		err := formats.Decode(&formatFamily) // <---- NOTE THAT WE ARE PUTTING A NEW VALUE INTO THE v4l2.FormatFamily HERE.
 //		if nil != err {
-//			fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format: (%T) %v \n", err, err)
+//			fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format family: (%T) %v \n", err, err)
 //			return err
 //		}
 //		
-//		fmt.Printf("[format] %q (%q) {compressed=%t} {emulated=%t} \n",
-//			format.Description(),
-//			format.PixelFormat(),
-//			format.HasFlags(v4l2.FormatFlagCompressed),
-//			format.HasFlags(v4l2.FormatFlagEmulated),
+//		fmt.Printf("[format family] %q (%q) {compressed=%t} {emulated=%t} \n",
+//			formatFamily.Description(),
+//			formatFamily.PixelFormat(),
+//			formatFamily.HasFlags(v4l2.FormatFamilyFlagCompressed),
+//			formatFamily.HasFlags(v4l2.FormatFamilyFlagEmulated),
 //		)
 //	}
 //	if err := formats.Err(); nil != err {
 //		return err
 //	}
 //
-// v4l2.Format is the same as the V4L2 (Video4Linux version 2) type v4l2_fmtdesc.
-type Format struct {
+// v4l2.FormatFamily is the same as the V4L2 (Video4Linux version 2) type v4l2_fmtdesc.
+type FormatFamily struct {
 	device  *Device
-	internal internalFormat
+	internal internalFormatFamily
 }
 
-type internalFormat struct {
+type internalFormatFamily struct {
 	index           uint32 // Format number
 	typ             uint32 // enum v4l2_buf_type
 	flags           uint32

@@ -6,8 +6,8 @@ import (
 	"unsafe"
 )
 
-// FrameSizes returns an iterator that enables you to list out all the supported frame sizes by the format.
-func (receiver *Format) FrameSizes() (FrameSizes, error) {
+// FrameSizes returns an iterator that enables you to list out all the supported frame sizes by the format family.
+func (receiver *FormatFamily) FrameSizes() (FrameSizes, error) {
 	if nil == receiver {
 		return FrameSizes{}, errNilReceiver
 	}
@@ -27,7 +27,7 @@ func (receiver *Format) FrameSizes() (FrameSizes, error) {
 	}, nil
 }
 
-// FrameSizes is an interator that enables you to list out all the supported formats by the device.
+// FrameSizes is an interator that enables you to list out all the supported formats by the format family.
 type FrameSizes struct {
 	device      *Device
 	pixelFormat  uint32

@@ -9,6 +9,6 @@ package v4l2
 // • "MJPG",
 //
 // • etc,
-func (receiver Format) PixelFormat() string {
+func (receiver FormatFamily) PixelFormat() string {
 	return fourcc(receiver.internal.pixelFormat).String()
 }

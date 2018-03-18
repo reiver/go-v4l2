@@ -1,42 +1,42 @@
 package v4l2
 
 const (
-	FormatFlagCompressed = 0x0001
-	FormatFlagEmulated   = 0x0002
+	FormatFamilyFlagCompressed = 0x0001 // V4L2_FMT_FLAG_COMPRESSED
+	FormatFamilyFlagEmulated   = 0x0002 // V4L2_FMT_FLAG_EMULATED
 )
 
-// HasFlags returns true if the Format has all the flags inquired about,
+// HasFlags returns true if the format family has all the flags inquired about,
 // and returns false otherwise.
 //
 // Example:
 //
-//	var format v4l2.Format
+//	var formatFamily v4l2.FormatFamily
 //	
 //	// ...
 //	
-//	if format.HasFlags(v4l2.FormatFlagCompressed) {
+//	if formatFamily.HasFlags(v4l2.FormatFamilyFlagCompressed) {
 //		//@TODO
 //	}
 //
 // Example:
 //
-//	var format v4l2.Format
+//	var formatFamily v4l2.FormatFamily
 //	
 //	// ...
 //	
-//	if format.HasFlags(v4l2.FormatFlagEmulated) {
+//	if formatFamily.HasFlags(v4l2.FormatFamilyFlagEmulated) {
 //		//@TODO
 //	}
 //
 // Example:
 //
-//	var format v4l2.Format
+//	var formatFamily v4l2.FormatFamily
 //	
 //	// ...
 //	
-//	if format.HasFlags(v4l2.FormatFlagCompressed | v4l2.FormatFlagEmulated) {
+//	if formatFamily.HasFlags(v4l2.FormatFamilyFlagCompressed | v4l2.FormatFamilyFlagEmulated) {
 //		//@TODO
 //	}
-func (receiver Format) HasFlags(flags uint32) bool {
+func (receiver FormatFamily) HasFlags(flags uint32) bool {
 	return 0 != (receiver.internal.flags & flags)
 }

@@ -30,18 +30,18 @@ Continuing this same example:
 	}
 	defer formats.Close()
 	
-	var format v4l2.Format
+	var formatFamily v4l2.FormatFamily
 	for formats.Next() {
 		
-		if err := formats.Decode(&format); nil != err {
+		if err := formats.Decode(&formatFamily); nil != err {
 			return err
 		}
 		
-		fmt.Printf("[format description] %q (%q) {compressed=%t} {emulated=%t} \n",
-			format.Description(),
-			format.PixelFormat(),
-			format.HasFlags(v4l2.FormatFlagCompressed),
-			format.HasFlags(v4l2.FormatFlagEmulated),
+		fmt.Printf("[format] %q (%q) {compressed=%t} {emulated=%t} \n",
+			formatFamily.Description(),
+			formatFamily.PixelFormat(),
+			formatFamily.HasFlags(v4l2.FormatFamilyFlagCompressed),
+			formatFamily.HasFlags(v4l2.FormatFamilyFlagEmulated),
 		)
 		
 		
@@ -55,7 +55,7 @@ Here we have iterating through the formats that are supported for this device.
 
 Extending that last code block, to fill in that "//@TODO", we can iterate through the frame sizes, for each format, we the following:
 
-		frameSizes, err := format.FrameSizes()
+		frameSizes, err := formatFamily.FrameSizes()
 		if nil != err {
 			return return
 		}

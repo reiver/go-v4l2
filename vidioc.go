@@ -25,10 +25,11 @@ const (
 	// A Golang conversion of the following C code:
 	//
 	// #define  VIDIOC_ENUM_FMT _IOWR('V',  2, struct v4l2_fmtdesc)
-	const_VIDIOC_ENUM_FMT = ((const_IOC_READ | const_IOC_WRITE)  << const_IOC_DIRSHIFT)  |
-	                        (uintptr('V')                        << const_IOC_TYPESHIFT) |
-	                        (2                                   << const_IOC_NRSHIFT)   |
-	                        (unsafe.Sizeof(internalFormat{})     << const_IOC_SIZESHIFT)
+	const_VIDIOC_ENUM_FMT = ((const_IOC_READ | const_IOC_WRITE)     << const_IOC_DIRSHIFT)  |
+	                        (uintptr('V')                           << const_IOC_TYPESHIFT) |
+	                        (2                                      << const_IOC_NRSHIFT)   |
+	                        (unsafe.Sizeof(internalFormatFamily{})  << const_IOC_SIZESHIFT)
+
 
 	// A Golang conversion of the following C code:
 	//

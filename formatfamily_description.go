@@ -1,6 +1,6 @@
 package v4l2
 
-// Description returns a human-readable description for the format description.
+// Description returns a human-readable description for the format family.
 //
 // Some examples of what might be returned by Description are;
 //
@@ -9,7 +9,7 @@ package v4l2
 // • "Motion-JPEG",
 //
 // • etc.
-func (receiver Format) Description() string {
+func (receiver FormatFamily) Description() string {
 
 	max := len(receiver.internal.description)
 
