@@ -40,12 +40,8 @@ import (
 //              return err
 //      }
 func (receiver *Device) FormatDescriptions() (FormatDescriptions, error) {
-	if nil == receiver {
-		return FormatDescriptions{}, errNilReceiver
-	}
-
-	if !receiver.opened {
-		return FormatDescriptions{}, errNotOpen
+	if err := receiver.unfit(); nil != err {
+		return FormatDescriptions{}, err
 	}
 
 	return FormatDescriptions{

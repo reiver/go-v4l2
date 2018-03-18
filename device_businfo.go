@@ -29,11 +29,8 @@ package v4l2
 //
 // What BusInfo returns is called "bus_info" in the Linux V4L2 documention, which is found in the Linux "v4l2_capability" data structure.
 func (receiver Device) BusInfo() (string, error) {
-	if !receiver.opened {
-		return "", errNotOpen
-	}
-	if !receiver.capQueried {
-		return "", errInternalError
+	if err := receiver.unfit(); nil != err {
+		return "", err
 	}
 
 	return receiver.cap.BusInfo(), nil

@@ -14,11 +14,8 @@ package v4l2
 // Also, if certain drivers have bugs, then this can (in part) be used to create driver
 // specific work-arounds.
 func (receiver Device) Driver() (string, error) {
-	if !receiver.opened {
-		return "", errNotOpen
-	}
-	if !receiver.capQueried {
-		return "", errInternalError
+	if err := receiver.unfit(); nil != err {
+		return "", err
 	}
 
 	return receiver.cap.Driver(), nil

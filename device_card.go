@@ -19,11 +19,8 @@ package v4l2
 // To make the name, shown to the user, unique, it can be combined with either the file name path,
 // or what BusInfo returns.
 func (receiver Device) Card() (string, error) {
-	if !receiver.opened {
-		return "", errNotOpen
-	}
-	if !receiver.capQueried {
-		return "", errInternalError
+	if err := receiver.unfit(); nil != err {
+		return "", err
 	}
 
 	return receiver.cap.Card(), nil

@@ -10,11 +10,8 @@ package v4l2
 //	
 //	hasVideoCaptureCapability, err := device.HasCapability(CapabilityVideoCapture)
 func (receiver Device) HasCapability(cap uint32) (bool, error) {
-	if !receiver.opened {
-		return false, errNotOpen
-	}
-	if !receiver.capQueried {
-		return false, errInternalError
+	if err := receiver.unfit(); nil != err {
+		return false, err
 	}
 
 	has := 0 != (receiver.cap.capabilities & cap)

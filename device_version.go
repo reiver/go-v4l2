@@ -8,11 +8,8 @@ package v4l2
 //
 // • "4.14.0"
 func (receiver Device) Version() (string, error) {
-	if !receiver.opened {
-		return "", errNotOpen
-	}
-	if !receiver.capQueried {
-		return "", errInternalError
+	if err := receiver.unfit(); nil != err {
+		return "", err
 	}
 
 	return receiver.cap.Version(), nil
