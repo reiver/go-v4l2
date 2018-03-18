@@ -22,10 +22,10 @@ func (receiver Device) Version() (string, error) {
 //
 // Example:
 //
-//      device := v4l2.MustOpen(v4l2.Video0)
-//      defer device.MustClose()
-//      
-//      fmt.Printf("Version: %q \n", device.MustVersion())
+//	device := v4l2.MustOpen(v4l2.Video0)
+//	defer device.MustClose()
+//	
+//	fmt.Printf("Version: %q \n", device.MustVersion())
 func (receiver Device) MustVersion() string {
 	datum, err := receiver.Version()
 	if nil != err {
