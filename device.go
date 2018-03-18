@@ -116,6 +116,12 @@ func (receiver *Device) Close() error {
 	return nil
 }
 
+// MustClose is like Close, except it panic()s if there is an error.
+//
+// Example:
+//
+//	device := v4l2.MustOpen(v4l2.Video0)
+//	defer device.MustClose()
 func (receiver *Device) MustClose() {
 	if nil == receiver {
 		panic(errNilReceiver)
