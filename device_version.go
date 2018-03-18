@@ -19,6 +19,13 @@ func (receiver Device) Version() (string, error) {
 }
 
 // MustVersion is like Version, except it panic()s if there is an error.
+//
+// Example:
+//
+//      device := v4l2.MustOpen(v4l2.Video0)
+//      defer device.MustClose()
+//      
+//      fmt.Printf("Version: %q \n", device.MustVersion())
 func (receiver Device) MustVersion() string {
 	datum, err := receiver.Version()
 	if nil != err {
