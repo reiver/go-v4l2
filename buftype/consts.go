@@ -17,4 +17,3 @@ const (
 
 	Private                 = 0x80 // (V4L2_BUF_TYPE_PRIVATE)  Deprecated, do not use
 )
-
