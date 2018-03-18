@@ -14,16 +14,16 @@ import (
 //      
 //      // ...
 //      
-//      formatDescriptions, err := device.Formats() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.Formats() METHOD IS CALLED.
+//      formats, err := device.Formats() // <---- NOTE THAT THIS IS WHERE THE v4l2.Device.Formats() METHOD IS CALLED.
 //      if nil != err {
 //              return err
 //      }
-//      defer formatDescriptions.Close()
+//      defer formats.Close()
 //      
 //      var formatDescription v4l2.Format
-//      forformatDescriptions.Next() {
+//      forformats.Next() {
 //
-//              err := formatDescriptions.Decode(&formatDescription)
+//              err := formats.Decode(&formatDescription)
 //              if nil != err {
 //                      fmt.Fprintf(os.Stderr, "ERROR: Problem decoding format: (%T) %v \n", err, err)
 //                      return err
@@ -36,7 +36,7 @@ import (
 //                      formatDescription.HasFlags(v4l2.FormatFlagEmulated),
 //              )
 //      }
-//      if err := formatDescriptions.Err(); nil != err {
+//      if err := formats.Err(); nil != err {
 //              return err
 //      }
 func (receiver *Device) Formats() (Formats, error) {
