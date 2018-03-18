@@ -84,6 +84,6 @@ type internalFormatDescription struct {
 	typ             uint32 // enum v4l2_buf_type
 	flags           uint32
 	description [32]byte   // Description string
-	pixelformat     uint32 // Format fourcc
+	pixelFormat     uint32 // Format fourcc
 	reserved     [4]uint32
 }
