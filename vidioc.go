@@ -1,6 +1,8 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/format"
+
 	"unsafe"
 )
 
@@ -30,6 +32,13 @@ const (
 	                        (2                                      << const_IOC_NRSHIFT)   |
 	                        (unsafe.Sizeof(internalFormatFamily{})  << const_IOC_SIZESHIFT)
 
+	// A Golang conversion of the following C code:
+	//
+	// #define VIDIOC_S_FMT     _IOWR('V',  5, struct v4l2_format)
+	const_VIDIOC_S_FMT = ((const_IOC_READ | const_IOC_WRITE)    << const_IOC_DIRSHIFT)  |
+	                        (uintptr('V')                       << const_IOC_TYPESHIFT) |
+	                        (5                                  << const_IOC_NRSHIFT)   |
+	                        (unsafe.Sizeof(v4l2_format.Type{})  << const_IOC_SIZESHIFT)
 
 	// A Golang conversion of the following C code:
 	//
