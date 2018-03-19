@@ -1,4 +1,4 @@
-package v4l2
+package v4l2_framesize
 
 import (
 	"github.com/reiver/go-v4l2/pixelformat"
@@ -13,8 +13,8 @@ const (
 	const_FRMSIZE_TYPE_STEPWISE   = 3
 )
 
-type FrameSize struct {
-	index        uint32                // Frame size number
+type Type struct {
+	Index        uint32                // Frame size number
 	PixelFormat  v4l2_pixelformat.Type // Pixel format
 	typ          uint32                // Frame size type the device supports.
 
@@ -23,20 +23,20 @@ type FrameSize struct {
 	reserved  [2]uint32                // Reserved space for future use
 }
 
-func (receiver FrameSize) Cast() (interface{}, error) {
+func (receiver Type) Cast() (interface{}, error) {
 	switch receiver.typ {
 	case const_FRMSIZE_TYPE_DISCRETE:
-		return *(*FrameSizeDiscrete)(unsafe.Pointer(&receiver)), nil
+		return *(*Discrete)(unsafe.Pointer(&receiver)), nil
 	case const_FRMSIZE_TYPE_CONTINUOUS:
-		return *(*FrameSizeContinuous)(unsafe.Pointer(&receiver)), nil
+		return *(*Continuous)(unsafe.Pointer(&receiver)), nil
 	case const_FRMSIZE_TYPE_STEPWISE:
-		return *(*FrameSizeStepwise)(unsafe.Pointer(&receiver)), nil
+		return *(*Stepwise)(unsafe.Pointer(&receiver)), nil
 	default:
 		return nil, fmt.Errorf("Unexpected frame size type: %d", receiver.typ)
 	}
 }
 
-type FrameSizeDiscrete struct {
+type Discrete struct {
 	index              uint32                // Frame size number
 	PixelFormat        v4l2_pixelformat.Type // Pixel format
 	typ                uint32                // Frame size type the device supports.
@@ -48,7 +48,7 @@ type FrameSizeDiscrete struct {
 	reserved        [2]uint32                // Reserved space for future use
 }
 
-type FrameSizeContinuous struct {
+type Continuous struct {
 	index              uint32                // Frame size number
 	PixelFormat        v4l2_pixelformat.Type // Pixel format
 	typ                uint32                // Frame size type the device supports.
@@ -63,7 +63,7 @@ type FrameSizeContinuous struct {
 	reserved        [2]uint32                // Reserved space for future use
 }
 
-type FrameSizeStepwise struct {
+type Stepwise struct {
 	index              uint32                // Frame size number
 	PixelFormat        v4l2_pixelformat.Type // Pixel format
 	typ                uint32                // Frame size type the device supports.

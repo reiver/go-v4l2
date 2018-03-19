@@ -1,6 +1,7 @@
 package v4l2
 
 import (
+	"github.com/reiver/go-v4l2/framesize"
 	"github.com/reiver/go-v4l2/pixelformat"
 
 	"golang.org/x/sys/unix"
@@ -34,7 +35,7 @@ type FrameSizes struct {
 	device      *Device
 	pixelFormat  v4l2_pixelformat.Type
 	err          error
-	datum        FrameSize
+	datum        v4l2_framesize.Type
 }
 
 // Close closes the FrameSizes iterator.
@@ -45,7 +46,7 @@ func (receiver *FrameSizes) Close() error {
 
 	receiver.device      = nil
 	receiver.err         = nil
-	receiver.datum.index = 0
+	receiver.datum.Index = 0
 
 	return nil
 }
@@ -56,7 +57,7 @@ func (receiver FrameSizes) Decode(x interface{}) error {
 		return receiver.err
 	}
 
-	p, ok := x.(*FrameSize)
+	p, ok := x.(*v4l2_framesize.Type)
 	if !ok {
 		return errUnsupportedType
 	}
@@ -108,7 +109,7 @@ func (receiver *FrameSizes) Next() bool {
 		return false
 	}
 
-	receiver.datum.index++
+	receiver.datum.Index++
 
 	return true
 }
